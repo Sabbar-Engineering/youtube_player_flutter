@@ -171,15 +171,21 @@ class _ProgressBarState extends State<ProgressBar> {
       child: Container(
         color: Colors.transparent,
         constraints: const BoxConstraints.expand(height: 7.0 * 2),
-        child: CustomPaint(
-          painter: _ProgressBarPainter(
-            progressWidth: 2.0,
-            handleRadius: 7.0,
-            playedValue: _playedValue,
-            bufferedValue: _bufferedValue,
-            colors: widget.colors,
-            touchDown: _touchDown,
-            themeData: Theme.of(context),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+            child: CustomPaint(
+              painter: _ProgressBarPainter(
+                progressWidth: 8.0,
+                handleRadius: 7.0,
+                playedValue: _playedValue,
+                bufferedValue: _bufferedValue,
+                colors: widget.colors,
+                touchDown: _touchDown,
+                themeData: Theme.of(context),
+              ),
+            ),
           ),
         ),
       ),
@@ -258,10 +264,8 @@ class _ProgressBarPainter extends CustomPainter {
 
     if (touchDown) {
       handlePaint.color = _handleColor.withOpacity(0.4);
-      canvas.drawCircle(progressPoint, handleRadius * 3, handlePaint);
     }
 
     handlePaint.color = _handleColor;
-    canvas.drawCircle(progressPoint, handleRadius, handlePaint);
   }
 }
